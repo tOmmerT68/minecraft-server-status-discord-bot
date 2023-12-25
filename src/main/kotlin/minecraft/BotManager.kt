@@ -3,6 +3,8 @@ package minecraft
 import minecraft.ConfigManager.configuration
 import net.dv8tion.jda.api.JDA
 import net.dv8tion.jda.api.JDABuilder
+import net.dv8tion.jda.api.OnlineStatus.DO_NOT_DISTURB
+import net.dv8tion.jda.api.OnlineStatus.ONLINE
 import net.dv8tion.jda.api.entities.Activity
 
 object BotManager {
@@ -10,7 +12,7 @@ object BotManager {
     lateinit var jda: JDA
         private set
 
-    fun registerBot(botToken: String?, status: String?) {
+    fun updateBot(botToken: String?, status: String?, isEmpty: Boolean) {
         if (botToken == null || botToken == "enter token here" || botToken == "") {
             println("[Discord-StatusBot] Invalid Bot Token!")
             println("[Discord-StatusBot] Get the token of your discord bot from here: https://discord.com/developers/applications")
@@ -28,8 +30,8 @@ object BotManager {
                     "watching" -> builder.setActivity(Activity.watching(status))
                     else -> {
                         builder.setActivity(Activity.of(Activity.ActivityType.PLAYING, status))
-                        println("Statusbot: invalid discord bot status mode: " + configuration?.getString("status_mode"))
-                        println("Statusbot: valid statuses are: playing, competing, listening, watching (Streaming is currently disabled)")
+                        println("[Discord-StatusBot] invalid discord bot status mode: " + configuration?.getString("status_mode"))
+                        println("[Discord-StatusBot] valid statuses are: playing, competing, listening, watching (Streaming is currently disabled)")
                     }
                 }
             } else {
@@ -46,11 +48,12 @@ object BotManager {
                     "watching" -> jda.presence.activity = Activity.watching(status)
                     else -> {
                         jda.presence.activity = Activity.of(Activity.ActivityType.PLAYING, status)
-                        System.out.println("Statusbot: invalid discord bot status mode: " + configuration?.getString("status_mode"))
-                        println("Statusbot: valid statuses are: playing, competing, listening, watching (Streaming is currently disabled)")
+                        println("[Discord-StatusBot] invalid discord bot status mode: " + configuration?.getString("status_mode"))
+                        println("[Discord-StatusBot] valid statuses are: playing, competing, listening, watching (Streaming is currently disabled)")
                     }
                 }
             }
         }
+        jda.presence.setStatus(if (isEmpty) DO_NOT_DISTURB else ONLINE)
     }
 }

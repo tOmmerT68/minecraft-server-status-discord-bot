@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "nl.tommert"
-version = "1.0-SNAPSHOT"
+version = "1.0"
 
 repositories {
     mavenCentral()
@@ -15,13 +15,13 @@ repositories {
 }
 
 dependencies {
-    implementation("org.spigotmc:spigot-api:1.12-R0.1-SNAPSHOT")
+    implementation("org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT")
     implementation("com.github.Carleslc.Simple-YAML:Simple-Yaml:1.8.4")
-    implementation("net.dv8tion:JDA:5.0.0-beta.13") {
+    implementation("net.dv8tion:JDA:5.0.0-beta.18") {
         exclude(module = "opus-java")
     }
     implementation("net.sf.trove4j:trove4j:3.0.3")
-    implementation ("com.fasterxml.jackson.core:jackson-databind:2.13.0")
+    implementation ("com.fasterxml.jackson.core:jackson-databind:2.14.0-rc1")
 }
 
 val targetJavaVersion = 17
@@ -59,7 +59,7 @@ tasks.named("shadowJar") {
 
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = "MainKt"
+        attributes["Main-Class"] = "StatusPluginKt"
     }
     configurations["compileClasspath"].forEach { file: File ->
         from(zipTree(file.absoluteFile))
