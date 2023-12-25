@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin
 class StatusPlugin : JavaPlugin(), Listener {
 
     init {
+        instance = this
         ConfigManager.init(this)
     }
 
@@ -45,7 +46,13 @@ class StatusPlugin : JavaPlugin(), Listener {
         try {
             BotManager.jda.shutdownNow()
         } catch (e: UninitializedPropertyAccessException) {
-            println("[Discord-StatusBot] JDA not initialized!")
+            logger.info("JDA not initialized!")
         }
+    }
+
+    companion object {
+
+        lateinit var instance: StatusPlugin
+            private set
     }
 }
