@@ -33,4 +33,4 @@ Once the plugin is installed and the Discord bot token is configured, the integr
 If you encounter any issues or have suggestions, please [create an issue](https://github.com/tOmmerT68/minecraft-server-status-discord-bot/issues) on our issue tracker.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](https://github.com/tOmmerT68/minecraft-server-status-discord-bot/blob/master/LICENSE).
