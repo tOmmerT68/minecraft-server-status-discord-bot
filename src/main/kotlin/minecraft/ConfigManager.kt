@@ -10,7 +10,7 @@ object ConfigManager {
     var isInitialized: Boolean = false
         private set
 
-    private var configFile: File? = null
+    private lateinit var configFile: File
 
     var configuration: YamlFile? = null
         private set
@@ -27,7 +27,7 @@ object ConfigManager {
 
             isInitialized = true
         } catch (error: IOException) {
-            println("[Discord-StatusBot] Something went wrong while creating the config file!")
+            plugin.logger.warning("Something went wrong while creating the config file!")
             error.printStackTrace()
         }
     }
