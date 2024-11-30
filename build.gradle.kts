@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "nl.tommert"
-version = "1.0"
+version = "1.0-1.21.3"
 
 repositories {
     mavenCentral()
@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.spigotmc:spigot-api:1.20.4-R0.1-SNAPSHOT")
+    implementation("org.spigotmc:spigot-api:1.21.3-R0.1-SNAPSHOT")
     implementation("com.github.Carleslc.Simple-YAML:Simple-Yaml:1.8.4")
     implementation("net.dv8tion:JDA:5.0.0-beta.18") {
         exclude(module = "opus-java")
@@ -24,7 +24,7 @@ dependencies {
     implementation ("com.fasterxml.jackson.core:jackson-databind:2.14.0-rc1")
 }
 
-val targetJavaVersion = 17
+val targetJavaVersion = 21
 java {
     val javaVersion = JavaVersion.toVersion(targetJavaVersion)
     sourceCompatibility = javaVersion
@@ -64,7 +64,7 @@ tasks.jar {
     configurations["compileClasspath"].forEach { file: File ->
         from(zipTree(file.absoluteFile))
     }
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     from(projectDir) {
         include("plugin.yml")
     }
